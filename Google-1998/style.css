@@ -1,0 +1,50 @@
+header{
+    padding-left: 40%;
+}
+
+body{
+    width:90%;
+    padding: 0 auto;
+}
+
+section{
+    text-align: center;
+    margin: 0 auto;
+}
+.body-div{
+    background-color: #EEEEEE;
+}
+
+
+.div1{
+    background-color: #7EE5DA;
+    float: left;
+    height: 100px;
+    width: 30%;
+    margin: 2px;
+}
+
+.div2{
+    background-color: #70CCC2;
+    float: left;
+    height: 100px;
+    width: 25%;
+    margin: 2px;
+}
+
+
+.div3{
+    background-color: #62B3AA;
+    float: left;
+    height: 100px;
+    width: 44%;
+    margin: 2px;
+}
+
+footer{
+    text-align: center;
+    font-size: 13px;
+}
+.clearfix{
+    clear: both;
+}
