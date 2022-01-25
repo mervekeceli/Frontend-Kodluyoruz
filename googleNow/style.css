@@ -1,0 +1,71 @@
+ul{
+    list-style-type: none;
+    
+}
+
+li{
+    padding: 10px;
+    display: inline;
+    text-align: center;
+}
+
+.topnav-right {
+    float: right;
+}
+
+.topnav {
+    overflow: hidden;
+  }
+  
+  .topnav a {
+    color: black;
+    float: left;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.img-div{
+    text-align: center;
+    margin-top: 300px;
+}
+
+
+.microphone {
+    border-top-right-radius: 32px !important;
+    border-bottom-right-radius: 32px !important;
+}
+
+.google {
+    border-top-left-radius: 32px !important;
+    border-bottom-left-radius: 32px !important;
+}
+
+.input-group-prepend {
+    margin-right: -2px !important
+}
+
+.input-group-append {
+    margin-left: -2px !important
+}
+
+.form-control:focus {
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0 !important
+}
+
+.form-control {
+    border-right: 0 !important;
+    border-left: 0 !important;
+    size: 30%;
+}
+
+.button-control{
+    align-items: center;
+    text-align: center;
+}
+
+.button-img{
+}
