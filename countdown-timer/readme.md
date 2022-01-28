@@ -6,7 +6,7 @@ Hesaplamaları için tarihleri ​​kullanan bir geri sayım sayacı. Son tarih
 
 Clone the project to your computer.
 ```
-> git clone https://github.com/mervekeceli/Frontend-Projects.git
+git clone https://github.com/mervekeceli/Frontend-Projects.git
 ```
 
 ## 📷 Screenshots
