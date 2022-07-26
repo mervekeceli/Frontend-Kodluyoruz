@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        .hidden {
+        display: none;
+        }
+
+        .pagination-container {
+        width: calc(100% - 2rem);
+        display: flex;
+        align-items: center;
+        position: relative;
+        bottom: 0;
+        padding: 1rem 0;
+        justify-content: center;
+        }
+
+        .pagination-number,
+        .pagination-button{
+        font-size: 1.1rem;
+        background-color: #ccc;
+        border: none;
+        margin: 0.25rem 0.25rem;
+        cursor: pointer;
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 50%;
+        }
+
+        .pagination-number:hover,
+        .pagination-button:not(.disabled):hover {
+            background: #ddd;
+        
+        }
+
+        .pagination-number.active {
+            color: #ddd;
+            background: #164850;
+            border-radius: 50%;
+        }
+
+        .pagination-number.active:hover{
+            opacity: 0.40;
+        }
+    </style>
+</head>
+<body>
+
+        <div id="search-list" data-current-page="1" aria-live="polite">
+          <div class="search-widget">Item 1</div>
+          <div class="search-widget">Item 2</div>
+          <div class="search-widget">Item 3</div>
+          <div class="search-widget">Item 4</div>
+          <div class="search-widget">Item 5</div>
+          <div class="search-widget">Item 6</div>
+          <div class="search-widget">Item 7</div>
+          <div class="search-widget">Item 8</div>
+          <div class="search-widget">Item 9</div>
+          <div class="search-widget">Item 10</div>
+          <div class="search-widget">Item 11</div>
+          <div class="search-widget">Item 12</div>
+          <div class="search-widget">Item 13</div>
+          <div class="search-widget">Item 14</div>
+          <div class="search-widget">Item 15</div>
+          <div class="search-widget">Item 16</div>
+          <div class="search-widget">Item 17</div>
+          <div class="search-widget">Item 18</div>
+          <div class="search-widget">Item 19</div>
+          <div class="search-widget">Item 20</div>
+          <div class="search-widget">Item 21</div>
+          <div class="search-widget">Item 22</div>
+          <div class="search-widget">Item 23</div>
+          <div class="search-widget">Item 24</div>
+          <div class="search-widget">Item 25</div>
+          <div class="search-widget">Item 26</div>
+          <div class="search-widget">Item 27</div>
+          <div class="search-widget">Item 28</div>
+          <div class="search-widget">Item 29</div>
+          <div class="search-widget">Item 30</div>
+        </div>
+      
+        <nav class="pagination-container">
+          <button class="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
+            &lt;
+          </button>
+      
+          <div id="pagination-numbers">
+      
+          </div>
+      
+          <button class="pagination-button" id="next-button" aria-label="Next page" title="Next page">
+            &gt;
+          </button>
+        </nav>
+      
+        <script>
+            const paginationNumbers = document.getElementById("pagination-numbers");
+            const paginatedList = document.getElementById("search-list");
+            const listItems = paginatedList.querySelectorAll("div");
+            const nextButton = document.getElementById("next-button");
+            const prevButton = document.getElementById("prev-button");
+
+            const paginationLimit = 5;
+            const pageCount = Math.ceil(listItems.length / paginationLimit);
+            let currentPage = 1;
+
+            const disableButton = (button) => {
+            button.classList.add("disabled");
+            button.setAttribute("disabled", true);
+            };
+
+            const enableButton = (button) => {
+            button.classList.remove("disabled");
+            button.removeAttribute("disabled");
+            };
+
+            const handlePageButtonsStatus = () => {
+            if (currentPage === 1) {
+                disableButton(prevButton);
+            } else {
+                enableButton(prevButton);
+            }
+
+            if (pageCount === currentPage) {
+                disableButton(nextButton);
+            } else {
+                enableButton(nextButton);
+            }
+            };
+
+            const handleActivePageNumber = () => {
+            document.querySelectorAll(".pagination-number").forEach((button) => {
+                button.classList.remove("active");
+                const pageIndex = Number(button.getAttribute("page-index"));
+                if (pageIndex == currentPage) {
+                button.classList.add("active");
+                }
+            });
+            };
+
+            const appendPageNumber = (index) => {
+            const pageNumber = document.createElement("button");
+            pageNumber.className = "pagination-number";
+            pageNumber.innerHTML = index;
+            pageNumber.setAttribute("page-index", index);
+            pageNumber.setAttribute("aria-label", "Page " + index);
+
+            paginationNumbers.appendChild(pageNumber);
+            };
+
+            const getPaginationNumbers = () => {
+            for (let i = 1; i <= pageCount; i++) {
+                appendPageNumber(i);
+            }
+            };
+
+            const setCurrentPage = (pageNum) => {
+            currentPage = pageNum;
+
+            handleActivePageNumber();
+            handlePageButtonsStatus();
+            
+            const prevRange = (pageNum - 1) * paginationLimit;
+            const currRange = pageNum * paginationLimit;
+
+            listItems.forEach((item, index) => {
+                item.classList.add("hidden");
+                if (index >= prevRange && index < currRange) {
+                item.classList.remove("hidden");
+                }
+            });
+            };
+
+            window.addEventListener("load", () => {
+            getPaginationNumbers();
+            setCurrentPage(1);
+
+            prevButton.addEventListener("click", () => {
+                setCurrentPage(currentPage - 1);
+            });
+
+            nextButton.addEventListener("click", () => {
+                setCurrentPage(currentPage + 1);
+            });
+
+            document.querySelectorAll(".pagination-number").forEach((button) => {
+                const pageIndex = Number(button.getAttribute("page-index"));
+
+                if (pageIndex) {
+                button.addEventListener("click", () => {
+                    setCurrentPage(pageIndex);
+                });
+                }
+            });
+            });
+        </script>
+
+</body>
+</html>
